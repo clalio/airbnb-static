@@ -89,3 +89,11 @@ activate :deploy do |deploy|
   # deploy.strategy = :submodule # commit strategy: can be :force_push or :submodule, default: :force_push
   # deploy.commit_message = 'custom-message' # commit message (can be empty), default: Automated commit at `timestamp` by middleman-deploy `version`
 end
+
+data.flats.keys.each do |name|
+  proxy "/flats/#{name}.html", "/flats/show.html", :locals => { :owner => name }, :ignore => true
+end
+#pour le rendre actif, à la place de devoir remplir avec chaque noms on met data.flats.key
+#--> egal a dire; on va chercher dans le dossier data, dans le dossier flats, le "seb, romain, anne"
+#--> ceci est une key. avec comme valeur associe tout le paragraph owner:seb etc...c'ets un hash d'un hash.
+#-->la formul nous renvoie un array de keys ([seb,anne,romain])
